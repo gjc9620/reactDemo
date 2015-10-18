@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>comment</title>
+		<meat charset="UTF-8">
+	 	<script src="../react-0.14.0/build/react.js"></script>
+		<script src="../react-0.14.0/build/react-dom.js"></script>
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>-->
+	    <script charset="UTF-8" src="../lib/babel-core_5.8.23_browser.min.js"></script>
+		
+  
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script type="text/babel">
+		var CommentBox = React.createClass({
+			render:function(){
+				return (
+					<div className="commentBox">
+						hello,world. i am  a commentBox
+					</div>
+				);
+			}
+		})
+		
+		
+		ReactDOM.render(
+			<CommentBox /> ,
+			document.getElementById("app")
+		);
+	</script>
+</html>

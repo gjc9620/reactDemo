@@ -22,11 +22,43 @@
 					</div>
 				);
 			}
+		});
+		
+		var CommentBox1 = React.createClass({
+			render:function(){
+				return (
+					<div className="commentBox">
+						<h1>Comment</h1>
+						<CommentList />
+						<CommentForm />
+					</div>
+				);
+			}
+		});
+		
+		var CommentList = React.createClass({
+		    render:function(){
+				return (
+					<div className="commentList">
+						hello , i am commentList
+					</div>
+				);
+			}
+		})	
+		
+		var CommentForm = React.createClass({
+			render:function(){
+				return (
+					<div className="commentForm">
+						hello, i am commentFormS
+					</div>
+				)
+			}
 		})
 		
 		
 		ReactDOM.render(
-			<CommentBox /> ,
+			<CommentBox1 /> ,
 			document.getElementById("app")
 		);
 	</script>

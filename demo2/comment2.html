@@ -7,6 +7,7 @@
 		<script src="../react-0.14.0/build/react-dom.js"></script>
 		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>-->
 	    <script charset="UTF-8" src="../lib/babel-core_5.8.23_browser.min.js"></script>
+		<script charset="UTF-8" src="../lib/marked_0.3.2_marked.min.js"></script>
 		
   
 	</head>
@@ -14,22 +15,14 @@
 		<div id="app"></div>
 	</body>
 	<script type="text/babel">
+ 
+		
 		var CommentBox = React.createClass({
 			render:function(){
 				return (
 					<div className="commentBox">
-						hello,world. i am  a commentBox
-					</div>
-				);
-			}
-		});
-		
-		var CommentBox1 = React.createClass({
-			render:function(){
-				return (
-					<div className="commentBox">
 						<h1>Comment</h1>
-						<CommentList />
+						<CommentList data={this.props.data} />
 						<CommentForm />
 					</div>
 				);
@@ -37,13 +30,22 @@
 		});
 		
 		var CommentList = React.createClass({
-		    render:function(){
+		
+			render: function() {
+				var commentNodes = this.props.data.map(function (comment) {
+					return (
+						<Comment author={comment.author}>
+							{comment.text}
+						</Comment>
+					);
+				});
 				return (
 					<div className="commentList">
-						hello , i am commentList
+						{commentNodes}
 					</div>
 				);
 			}
+		    
 		});	
 		
 		var CommentForm = React.createClass({
@@ -58,22 +60,33 @@
 		
 		
 		var Comment = React.createClass({
+		
+			rawMarkup:function(){
+				var rawMarkup = marked(this.props.children.toString() , {sanitize: true});
+				return { __html : rawMarkup }
+			},
 			render:function(){
 				return(
 					<div className="commentAuthor">
 						<h2>
 							{this.props.Author}
 						</h2>
-						{this.props.children}
+						<span dangerouslySetInnerHTML={this.rawMarkup()} />
 					</div>
 				)
 			}
 		})
 		
-		
+		var data = [
+			{author: "Pete Hunt", text: "This is one comment"},
+			{author: "Jordan Walke", text: "This is *another* comment"}
+		];
 		ReactDOM.render(
-			<CommentBox1 /> ,
+			<CommentBox data={data} />,
 			document.getElementById("app")
 		);
+		
+		//搞明白里面的xss原理
+	    //Comment的children是什么
 	</script>
 </html>

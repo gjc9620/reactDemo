@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>comment</title>
+		<meat charset="UTF-8">
+	 	<script src="../react-0.14.0/build/react.js"></script>
+		<script src="../react-0.14.0/build/react-dom.js"></script>
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>-->
+	    <script charset="UTF-8" src="../lib/babel-core_5.8.23_browser.min.js"></script>
+		
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script type="text/babel"> 
+		 
+		 var A = React.createClass({
+		 	getInitialState: function(){
+				return ({
+					val:"1111"
+				}); 
+			},
+			onChildChanged: function(val){ 
+				this.setState({
+					val: val
+				});
+			},
+			render:function(){  
+				return(
+					<div>
+						<div>{this.state.val}</div>
+						<B val={this.state.val}  onChildChanged={this.onChildChanged} />
+						<C val={this.state.val} onChildChanged={this.onChildChanged} />
+					</div>
+				);	
+			}
+		 });
+		 
+		 var B = React.createClass({
+		 	// getInitialState: function(){
+			// 	return ({
+			// 		val:this.props.val
+			// 	}); 
+			// },
+		 	onChange:function(event){
+			 	let val = event.target.value
+				this.props.onChildChanged(val); 
+			},
+			render:function(){ 
+				return (
+					<input type="text"   value={this.props.val} onChange={this.onChange} />
+				);
+			}
+		 });
+		 
+		 
+		var C = React.createClass({
+		 	// getInitialState: function(){ 
+			// 	console.log("props:"+this.props.val)
+			// 	return ({
+			// 		val:this.props.val
+			// 	}); 
+			// },
+			changeState:function(val){
+				this.state.val = val
+			},
+		 	onChange:function(event){
+			 	let val = event.target.value
+				this.props.onChildChanged(val); 
+			},
+			render:function(){ 
+				
+				// this.changeState(this.props.val)
+				// console.log(this.state.val)
+				// console.log("props:"+this.props.val)
+				return (
+					<input type="text" value={this.props.val} onChange={this.onChange}    />
+				);
+			}
+		 });
+		 
+		 ReactDOM.render(
+		 	<A/>,
+			document.getElementById("app")
+		 );
+		 
+		 
+	</script>
+</html>

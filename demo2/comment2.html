@@ -32,13 +32,13 @@
 		var CommentList = React.createClass({
 		
 			render: function() {
-				var commentNodes = this.props.data.map(function (comment) {
+				var commentNodes = this.props.data.map(function (comment) { 
 					return (
 						<Comment author={comment.author}>
-							{comment.text}
+							{comment.text} 
 						</Comment>
 					);
-				});
+				}); 
 				return (
 					<div className="commentList">
 						{commentNodes}
@@ -62,31 +62,31 @@
 		var Comment = React.createClass({
 		
 			rawMarkup:function(){
-				var rawMarkup = marked(this.props.children.toString() , {sanitize: true});
+				var rawMarkup = marked(this.props.children , {sanitize: true}); 
+				console.log(this.props.children);
 				return { __html : rawMarkup }
 			},
 			render:function(){
 				return(
 					<div className="commentAuthor">
 						<h2>
-							{this.props.Author}
+							{this.props.author}
 						</h2>
 						<span dangerouslySetInnerHTML={this.rawMarkup()} />
 					</div>
 				)
 			}
-		})
+		});
 		
+		var BB = "<h1>alert(1)</h1>";
 		var data = [
 			{author: "Pete Hunt", text: "This is one comment"},
-			{author: "Jordan Walke", text: "This is *another* comment"}
+			{author: "Jordan Walke", text: "This is *another* comment"+BB}
 		];
 		ReactDOM.render(
 			<CommentBox data={data} />,
 			document.getElementById("app")
 		);
 		
-		//搞明白里面的xss原理
-	    //Comment的children是什么
 	</script>
 </html>

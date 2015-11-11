@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+	 	<script src="../react-0.14.0/build/react.js"></script>
+		<script src="../react-0.14.0/build/react-dom.js"></script>
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>-->
+	    <script charset="UTF-8" src="../lib/babel-core_5.8.23_browser.min.js"></script>
+		
+  
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script type="text/babel"> 
+	
+
+		var FancyCheckbox = React.createClass({
+			render: function() {
+			
+				console.log(this.props);
+				
+				var { checked,aa ,...other } = this.props;
+				
+				var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
+				// `other` 包含 { onClick: console.log } 但 checked 属性除外
+				
+				console.log(this.props);
+				return (
+					<BoxA {...other} className={fancyClass} />
+					
+				);
+			}
+		});
+		
+		
+		var BoxA = React.createClass({
+			
+			render : function(){
+				console.log(this.props);
+				return (
+					<div {...this.props} />
+				)
+			}
+		});
+		
+		ReactDOM.render(
+			<FancyCheckbox checked={true} aa={"aaa"} bb={"bbbb"} cc={"ccc"} onClick={console.log.bind(console)}>
+				Hello world!
+			</FancyCheckbox>,
+			document.getElementById("app")
+		);
+		
+	 	
+				
+	</script>
+</html>

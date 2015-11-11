@@ -37,11 +37,19 @@
 		
 		
 		var BoxA = React.createClass({
+		
+			propTypes : { //验证
+				bb : function(props, propName, componentName){
+					if(props[propName] === "bbbb"){
+						return new Error("error")
+					}
+				}
+			},
 			
 			render : function(){
 				console.log(this.props);
 				return (
-					<div {...this.props} />
+					<div {...this.props} children={this.props.bb} />
 				)
 			}
 		});

@@ -15,29 +15,37 @@
 	</body>
 	<script type="text/babel" charset="UTF-8"> 
 
-		 var MyComponent = React.createClass({
-			  handleClick: function() {
-			    // Explicitly focus the text input using the raw DOM API.
-			    this.refs.myTextInput.getDOMNode().focus();
-			  },
-			  render: function() {
-			    // The ref attribute adds a reference to the component to
-			    // this.refs when the component is mounted.
-			    return (
-			      <div>
-			        <input type="text" ref="myTextInput" />
-			        <input
-			          type="button"
-			          value="Focus the text input"
-			          onClick={this.handleClick}
-			        />
-			      </div>
-			    );
-			  }
+		 var App = React.createClass({
+		    getInitialState: function() {
+		      return {userInput: ''};
+		    },
+		    handleChange: function(e) {
+		      this.setState({userInput: e.target.value});
+		    },
+		    clearAndFocusInput: function() {
+		      this.setState({userInput: ''}); // Clear the input
+		      // We wish to focus the <input /> now!
+		      this.refs.theInput.focus();
+		      // this.refs.theInput.getDOMNode().focus();   //过时的写法
+		    },
+		    render: function() {
+		      return (
+		        <div>
+		          <div onClick={this.clearAndFocusInput}>
+		            Click to Focus and Reset
+		          </div>
+		          <input
+		          	ref="theInput"
+		            value={this.state.userInput}
+		            onChange={this.handleChange}
+		          />
+		        </div>
+		      );
+		    }
 		});
 
 		ReactDOM.render(
-			<MyComponent />,
+			<App />,
 			document.getElementById("app")
 		)		
 

@@ -5,12 +5,75 @@
     <title>positioning</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script src="../react-0.14.0/build/react.js"></script>
+    <script src="../react-0.14.0/build/react-dom.js"></script>
+    <script charset="UTF-8" src="../lib/babel-core_5.8.23_browser.min.js"></script>
     <style type="text/css">
-        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        body,html{
+            padding: 0px;
+            margin: 0px;
+            height: 100%;
+        }
+       #map {
+           width: 100%;
+           height: 100%;
+           margin:0;
+           font-family:"微软雅黑"
+       }
+        #marker{
+            background: url("marker_red_sprite.png");
+            width: 19.5px;
+            position: relative;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FB9701efc710fdf8810350668bdaaaf6"></script>
 </head>
 <body>
-    
+
 </body>
 </html>
+<script>
+    // 百度地图API功能
+//    var map = new BMap.Map("map");    // 创建Map实例
+//    map.centerAndZoom(new BMap.Point(120.976159, 31.113901), 11);  // 初始化地图,设置中心点坐标和地图级别
+//    function showInfo(e){
+//        console.log(e.point.lng + ", " + e.point.lat);
+//    }
+//    map.addEventListener("click", showInfo);
+////    map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+////    map.setCurrentCity("上海");
+////    map.setCurrentCity("北京");
+//    var marker = new BMap.Marker(new BMap.Point(120.976159, 31.113901));
+//    console.log(marker.getOffset());
+//    map.addOverlay(marker);            //增加点
+//    map.setCenter("上海");
+//    map.enableScrollWheelZoom(true);
+</script>
+<script type="text/babel">
+    let {Component} = React;
+    class Positioning extends Component{
+        componentDidMount(){
+            // 百度地图API功能
+            var map = new BMap.Map("map");    // 创建Map实例
+            map.centerAndZoom(new BMap.Point(120.976159, 31.113901), 11);  // 初始化地图,设置中心点坐标和地图级别
+        }
+
+        render(){
+            return(
+                <article id="mapBox">
+                  <div id="map"></div>
+                  <section id="marker"></section>
+                </article>
+            )
+        }
+    }
+
+    ReactDOM.render(
+            <Positioning/>,
+            document.getElementById("app")
+    )
+
+</script>

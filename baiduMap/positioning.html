@@ -68,15 +68,15 @@
 
     "use strict";
     let util = {
-        jsonp: function(url, params) {
+        jsonp: function(url) {
             var script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = url + this.serialize(params);
+            script.src = url;
             document.getElementsByTagName('head')[0].appendChild(script)
         }
     };
-    let renderReverse = (json)=>{
-        
+    window.renderCallback = (json)=>{
+        console.log(json.result);
     };
     let {Component} = React;
 
@@ -109,12 +109,8 @@
             let centerPoint =  this.map.getCenter();
             let {lat, lng} = centerPoint,
                 ak = "FB9701efc710fdf8810350668bdaaaf6";
-            let url = `http://api.map.baidu.com/geocoder/v2/?ak=${ak}&callback=renderReverse&location=${lat},${lng}&output=json&pois=1`
-            fetch(url).then((json)=>{
-                console.log(json);
-            }).catch((err)=>{
-                console.log(err);
-            })
+            let url = `http://api.map.baidu.com/geocoder/v2/?ak=${ak}&callback=renderCallback&location=${lat},${lng}&output=json&pois=1`
+            util.jsonp(url);
         }
 
         render(){

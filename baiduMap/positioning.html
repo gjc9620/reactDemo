@@ -75,9 +75,7 @@
             document.getElementsByTagName('head')[0].appendChild(script)
         }
     };
-    window.renderCallback = (json)=>{
-        console.log(json.result);
-    };
+    window.renderCallback = null;
     let {Component} = React;
 
     class Map extends Component{
@@ -90,10 +88,15 @@
             map.setCenter("上海");
             map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
             this.addListen();
+            window.renderCallback = this.fetchDateComplete;
         }
         addListen(){
             this.map.addEventListener("dragend",this.dragend);
             this.map.addEventListener("zoomend",this.zoomend);
+        }
+
+        fetchDateComplete(json){
+            console.log(json.result);
         }
 
         zoomend(){

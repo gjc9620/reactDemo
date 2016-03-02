@@ -47,7 +47,7 @@
     <div id="app"></div>
 </body>
 </html>
-<script>
+<script  type="text/babel">
     // 百度地图API功能
 //    var map = new BMap.Map("map");    // 创建Map实例
 //    map.centerAndZoom(new BMap.Point(120.976159, 31.113901), 11);  // 初始化地图,设置中心点坐标和地图级别
@@ -77,6 +77,14 @@
     };
     window.renderCallback = null;
     let {Component} = React;
+
+    class SearchResult extends Component{
+        render(){
+            return (
+                    <div>aaa</div>
+            )
+        }
+    }
 
     class Map extends Component{
         componentDidMount(){
@@ -139,6 +147,7 @@
             return(
                 <div id="positioning">
                   <MapBox />
+                  <SearchResult />
                 </div>
             )
         }

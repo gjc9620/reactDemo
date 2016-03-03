@@ -79,14 +79,42 @@
     let {Component} = React;
 
     class SearchResult extends Component{
+
+        constructor(props) {
+            super(props);
+            this.state = {
+                mapResult: {
+                    pois:[]
+                }
+            };
+        }
+
+
+        componentDidMount(){
+            window.renderCallback = this.fetchDateComplete.bind(this);
+        }
+        fetchDateComplete(json){
+            this.setState({mapResult: json.result});
+        }
         render(){
+            console.log(this.state.mapResult.pois);
+            let resultList = this.state.mapResult.pois.map((v, i, n)=>{
+                return (
+                    <div key={i}>{v.addr}</div>
+                )
+            });
             return (
-                    <div>aaa</div>
+                <div>
+                    {resultList}
+                </div>
             )
         }
     }
 
     class Map extends Component{
+        constructor(props) {
+            super(props);
+        }
         componentDidMount(){
             // 百度地图API功能
             var map = new BMap.Map("map");// 创建Map实例
@@ -96,16 +124,13 @@
             map.setCenter("上海");
             map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
             this.addListen();
-            window.renderCallback = this.fetchDateComplete;
+
         }
         addListen(){
             this.map.addEventListener("dragend",this.dragend);
             this.map.addEventListener("zoomend",this.zoomend);
         }
 
-        fetchDateComplete(json){
-            console.log(json.result);
-        }
 
         zoomend(){
             this.component.geocoder(); //this指向map对象
@@ -132,6 +157,9 @@
     };
 
     class MapBox extends Component{
+        constructor(props) {
+            super(props);
+        }
         render(){
             return(
                 <div id="mapBox">
@@ -143,6 +171,9 @@
     }
 
     class Positioning extends Component{
+        constructor(props) {
+            super(props);
+        }
         render(){
             return(
                 <div id="positioning">

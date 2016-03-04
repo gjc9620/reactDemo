@@ -97,10 +97,10 @@
             this.setState({mapResult: json.result});
         }
         render(){
-            console.log(this.state.mapResult.pois);
+            console.log(this.state.mapResult);
             let resultList = this.state.mapResult.pois.map((v, i, n)=>{
                 return (
-                    <div key={i}>{v.addr}</div>
+                    <div key={i}>{v.addr + v.name }</div>
                 )
             });
             return (

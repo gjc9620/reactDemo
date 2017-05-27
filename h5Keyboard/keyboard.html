@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>keyboard</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
-	<!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="default">
-	<meta name="format-detection" content="telephone=no">
-	<script src="../react-0.14.0/build/react.js"></script>
-	<script src="../react-0.14.0/build/react-dom.js"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>-->
-	<script charset="UTF-8" src="../lib/babel-core_5.8.23_browser.min.js"></script>
+  <title>keyboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+  <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <script src="../react-0.14.0/build/react.js"></script>
+  <script src="../react-0.14.0/build/react-dom.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>-->
+  <script charset="UTF-8" src="../lib/babel-core_5.8.23_browser.min.js"></script>
 </head>
 <style>
-	.keyboard{
-		
-	}
-	.keyboard-noActivate{
-		display: none;
-	}
-	.keyboard-activate{
-		display: block;
-	}
-	.key{
-		width: 30vw;
-		display: inline-block;
-		text-align: center;
-	}
-	.cursor{
-		display: none;
-	}
-	.blink-cursor{
-		animation: blink 1s infinite;
-	}
-	@keyframes blink {
-		0% {color: #FFF;}
-		50% {color: #FFF;}
-		51% {color: #000;}
-		100% {color:#000 ;}
-	}
-	
-	.input{
-		width: 50vw;
-		height: 30px;
-		border: 1px solid black;
-		overflow: auto;
-		white-space: nowrap;
-	}
-	.input-focus:after{
-		content: "|";
-		animation: blink 1s infinite;
-	}
-	.input-notFocus{
-		
-	}
+  .keyboard{
+    
+  }
+  .keyboard-noActivate{
+    display: none;
+  }
+  .keyboard-activate{
+    display: block;
+  }
+  .key{
+    width: 30vw;
+    display: inline-block;
+    text-align: center;
+  }
+  .cursor{
+    display: none;
+  }
+  .blink-cursor{
+    animation: blink 1s infinite;
+  }
+  @keyframes blink {
+    0% {color: #FFF;}
+    50% {color: #FFF;}
+    51% {color: #000;}
+    100% {color:#000 ;}
+  }
+  
+  .input{
+    width: 50vw;
+    height: 30px;
+    border: 1px solid black;
+    overflow: auto;
+    white-space: nowrap;
+  }
+  .input-focus:after{
+    content: "|";
+    animation: blink 1s infinite;
+  }
+  .input-notFocus{
+    
+  }
 
 </style>
 <body>
@@ -62,14 +62,14 @@
 </body>
 <script type="text/babel" charset="UTF-8">
   
-	const Input = (props) => {
+  const Input = (props) => {
     const {isFocus, onClick, value} =  props;
     const styleClass = isFocus?"input-focus" : 'input-notFocus';
     return (
-			<div className={"h5uiinput input "+ styleClass} onClick={onClick} >{value}</div>
+      <div className={"h5uiinput input "+ styleClass} onClick={onClick} >{value}</div>
     )
-	};
-	
+  };
+  
   class InputProxy extends React.Component {
     constructor(props){
       super(props);
@@ -83,7 +83,7 @@
       action.setKeyBoradPullCb((cb = _=>_)=>{
         this.setState({
           isFocus: false,
-	        gg: 11
+          gg: 11
         },cb)
       });
     }
@@ -91,9 +91,9 @@
       this.setState({isFocus: true});
   
       window.action.setKeyBoradActivateStatus(true,() =>{
-	      window.action.setKeyBoradClick((num)=>{
-	        this.setState({value: this.state.value + num});
-	      })
+        window.action.setKeyBoradClick((num)=>{
+          this.setState({value: this.state.value + num});
+        })
       });
     }
     render(){
@@ -108,18 +108,18 @@
     const {keyOnClick, isActivate, onDelete} =  props;
     const styleClass = isActivate?"keyboard-activate" : 'keyboard-noActivate';
     return (
-		  <div className={"keyboard " + styleClass}>
-			  <div className="key" onClick={keyOnClick.bind(this, 1)}>1</div>
-			  <div className="key" onClick={keyOnClick.bind(this, 2)}>2</div>
-			  <div className="key" onClick={keyOnClick.bind(this, 3)}>3</div>
-			  <div className="key" onClick={keyOnClick.bind(this, 4)}>4</div>
-			  <div className="key" onClick={keyOnClick.bind(this, 5)}>5</div>
-			  <div className="key" onClick={keyOnClick.bind(this, 6)}>6</div>
-			  <div className="key" onClick={keyOnClick.bind(this, 7)}>7</div>
-			  <div className="key" onClick={keyOnClick.bind(this, 8)}>8</div>
-			  <div className="key" onClick={keyOnClick.bind(this, 9)}>9</div>
-			  <div className="key" onClick={onDelete.bind(this, 1)}>delete</div>
-		  </div>
+      <div className={"keyboard " + styleClass}>
+        <div className="key" onClick={keyOnClick.bind(this, 1)}>1</div>
+        <div className="key" onClick={keyOnClick.bind(this, 2)}>2</div>
+        <div className="key" onClick={keyOnClick.bind(this, 3)}>3</div>
+        <div className="key" onClick={keyOnClick.bind(this, 4)}>4</div>
+        <div className="key" onClick={keyOnClick.bind(this, 5)}>5</div>
+        <div className="key" onClick={keyOnClick.bind(this, 6)}>6</div>
+        <div className="key" onClick={keyOnClick.bind(this, 7)}>7</div>
+        <div className="key" onClick={keyOnClick.bind(this, 8)}>8</div>
+        <div className="key" onClick={keyOnClick.bind(this, 9)}>9</div>
+        <div className="key" onClick={onDelete.bind(this, 1)}>delete</div>
+      </div>
     );
   }
   
@@ -135,11 +135,11 @@
       //不写了
     }
     render(){
-	    return <KeyBoard
-		    {...this.props}
-		    keyOnClick={this.keyOnClick}
-		    onDelete={this.onDelete}
-	    />
+      return <KeyBoard
+        {...this.props}
+        keyOnClick={this.keyOnClick}
+        onDelete={this.onDelete}
+      />
     }
     
   }
@@ -150,12 +150,12 @@
     }
     render(){
       return (
-	      <div className="page"  {...this.props}>
-		      <InputProxy />
-		      <InputProxy />
-		      <InputProxy />
-		      <InputProxy />
-	      </div>
+        <div className="page"  {...this.props}>
+          <InputProxy />
+          <InputProxy />
+          <InputProxy />
+          <InputProxy />
+        </div>
       )
     }
   }
@@ -165,35 +165,35 @@
       super(props);
       this.pullKeyBorad = this.pullKeyBorad.bind(this);
       this.state = { //this is store
-	      keyBoard:{
+        keyBoard:{
           kbisActivate: false,
-		      onClick: () => {},
+          onClick: () => {},
           pullCb: []
-	      }
+        }
       }
       
       window.action = {  //this is actions
         setKeyBoradClick: (fun, cb = _=>_) => {
           this.setState({
             keyBoard:{
-	            ...this.state.keyBoard,
+              ...this.state.keyBoard,
               onClick: fun
             }
           },cb)
         },
-	      setKeyBoradActivateStatus: (status, cb = _=>_) => {
+        setKeyBoradActivateStatus: (status, cb = _=>_) => {
           this.setState({
             keyBoard:{
-	            ...this.state.keyBoard,
+              ...this.state.keyBoard,
               kbisActivate: status
             }
           }, cb)
         },
-	      setKeyBoradPullCb: (fun, cb = _=>_) => {
+        setKeyBoradPullCb: (fun, cb = _=>_) => {
           this.state.keyBoard.pullCb.push(fun);
           this.setState({
             keyBoard:{
-	            ...this.state.keyBoard
+              ...this.state.keyBoard
             }
           }, cb)
         },
@@ -201,24 +201,24 @@
     }
     pullKeyBorad(){
       action.setKeyBoradActivateStatus(false)
-	    this.state.keyBoard.pullCb.forEach(fun => fun());
+      this.state.keyBoard.pullCb.forEach(fun => fun());
     }
     render(){
       const pageOnclick = this.state.keyBoard.kbisActivate? this.pullKeyBorad: null;
       return(
-				<div>
-					<Page onClick={pageOnclick}/>
-					<KeyboardProxy
-						isActivate={this.state.keyBoard.kbisActivate}
-						onClick = {this.state.keyBoard.onClick}
-					/>
-				</div>
+        <div>
+          <Page onClick={pageOnclick}/>
+          <KeyboardProxy
+            isActivate={this.state.keyBoard.kbisActivate}
+            onClick = {this.state.keyBoard.onClick}
+          />
+        </div>
       )
     }
   };
   
   ReactDOM.render(
-		<App />,
+    <App />,
     document.getElementById("app")
   );
 

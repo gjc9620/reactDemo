@@ -45,6 +45,8 @@
 		width: 50vw;
 		height: 30px;
 		border: 1px solid black;
+		overflow: auto;
+		white-space: nowrap;
 	}
 	.input-focus:after{
 		content: "|";
@@ -83,14 +85,14 @@
           isFocus: false,
 	        gg: 11
         },cb)
-      })
+      });
     }
     onClickHandle(){
       this.setState({isFocus: true});
   
       window.action.setKeyBoradActivateStatus(true,() =>{
 	      window.action.setKeyBoradClick((num)=>{
-	        this.setState({value: this.state.num + num});
+	        this.setState({value: this.state.value + num});
 	      })
       });
     }
@@ -107,16 +109,16 @@
     const styleClass = isActivate?"keyboard-activate" : 'keyboard-noActivate';
     return (
 		  <div className={"keyboard " + styleClass}>
-			  <div className="key" onclick={keyOnClick.bind(this, 1)}>1</div>
-			  <div className="key" onclick={keyOnClick.bind(this, 2)}>2</div>
-			  <div className="key" onclick={keyOnClick.bind(this, 3)}>3</div>
-			  <div className="key" onclick={keyOnClick.bind(this, 4)}>4</div>
-			  <div className="key" onclick={keyOnClick.bind(this, 5)}>5</div>
-			  <div className="key" onclick={keyOnClick.bind(this, 6)}>6</div>
-			  <div className="key" onclick={keyOnClick.bind(this, 7)}>7</div>
-			  <div className="key" onclick={keyOnClick.bind(this, 8)}>8</div>
-			  <div className="key" onclick={keyOnClick.bind(this, 9)}>9</div>
-			  <div className="key" onclick={onDelete.bind(this, 1)}>delete</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 1)}>1</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 2)}>2</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 3)}>3</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 4)}>4</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 5)}>5</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 6)}>6</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 7)}>7</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 8)}>8</div>
+			  <div className="key" onClick={keyOnClick.bind(this, 9)}>9</div>
+			  <div className="key" onClick={onDelete.bind(this, 1)}>delete</div>
 		  </div>
     );
   }
@@ -130,7 +132,7 @@
       this.props.onClick && this.props.onClick(num);
     }
     onDelete(){
-      
+      //不写了
     }
     render(){
 	    return <KeyBoard
@@ -200,10 +202,6 @@
     pullKeyBorad(){
       action.setKeyBoradActivateStatus(false)
 	    this.state.keyBoard.pullCb.forEach(fun => fun());
-//	    const [ f1 , f2 , f3 ,f4] =   this.state.keyBoard.pullCb;
-//      debugger
-//      f1(f2(f3(f4)));
-	    
     }
     render(){
       const pageOnclick = this.state.keyBoard.kbisActivate? this.pullKeyBorad: null;

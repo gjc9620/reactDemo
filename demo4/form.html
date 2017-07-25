@@ -13,30 +13,57 @@
 	<body>
 		<div id="app"></div>
 	</body>
-	<script type="text/babel" charset="UTF-8"> 
+	<script type="text/babel" charset="UTF-8">
 		 
 	///////////////////////////////// //input /////////////////////////
+  
+	
+	
 	var Input1 = React.createClass({
+    getInitialState : function(){
+      return {
+        value   : '',
+      }
+    },
+    onChange:function (e) {
+      this.setState({ value :e.target.value},()=>{
+       this.props.reRender(e.target.value, e.target.value);
+      });
+      
+    },
 		render : function(){
-			console.log(this.props)
+      console.log(this.state)
+//			debugger
 			return (
-				<input {...this.props} />
+				<input  value={undefined}  onChange={this.onChange} />
 			)
 		}
 	});
 	
+	var Parent = React.createClass({
+    reRender: function (a, b) {
+      this.setState({ [a] : b });
+    },
+	  render : function(){
+	    console.log(this.state)
+	    return (
+				<Input1 reRender={this.reRender} />
+	    )
+	  }
+	});
+	
 	ReactDOM.render(
-		<Input1 type={"checkbox"}  defaultChecked={true}> cilckme </Input1>,
+    <Parent />,
 		document.getElementById("app")
 	);
 	
 	///////////////////////////////select ///////////////////////////////
-	
+	/*
 	var SelectClass = React.createClass({
 		render: function(){
 			
 			return (
-				<select> 
+				<select>
 					{
 						// {...this.props.children}
 						this.props.children.map(function(v,i,a){
@@ -85,7 +112,7 @@
 					<input type="radio" name="opt" defaultChecked /> Option 1
 				    <input type="radio" name="opt" /> Option 2
 			    </div>
-			)	
+			)
 		}
 	});
 
@@ -93,9 +120,10 @@
 		<RadioClass />,
 		document.getElementById("app")
 	);
-	
-				
-
-				
+	 
+	 
+	 
+	 
+	 */
 	</script>
 </html>
